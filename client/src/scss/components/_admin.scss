@@ -1,0 +1,97 @@
+@import '../variables';
+.admin-wrapper{
+  display: flex;
+  height: 100vh;
+  background-color: #fff;
+  position: absolute;
+  width: 100vw;
+  top: 0;
+
+  &__nav-site{
+    flex: 0 0 250px;
+    border-right: 1px solid #d6d6d6;
+    height: 100vh;
+    position: relative;
+
+    .with-header{
+      position: static;
+    }
+
+    .logout{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: red;
+      color: #eee9e3;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+  &__content-wrapper{
+    flex: 0 0 calc(100vw - 250px);
+    height: 100vh;
+  }
+  &__header-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+  }
+
+  &__body-content{
+    position: relative;
+
+    .table{
+      &__header{
+        box-shadow: 0px 12px 17px -8px #757575;
+        height: 30px;
+        margin-bottom: 0px;
+        z-index: 10000;
+        position: relative;
+
+        .table__item{
+          justify-content: center;
+          display: flex;
+          font-weight: bold;
+        }
+      }
+      &__row{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+      }
+      &__body{
+        max-height: calc(100vh - 120px);
+        overflow: scroll;
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+      }
+      &__item{
+        flex: 0 0 100px;
+        text-align: center;
+      }
+    }
+
+  }
+
+  .collection{
+    margin: 0;
+  }
+}
+.delete-icon{
+  color: #c80000;
+  cursor: pointer;
+}
+.edit-icon{
+  color: #26a59a;
+  cursor: pointer;
+}
+
+
+
+@media all and (max-width: 500px) {
+
+}

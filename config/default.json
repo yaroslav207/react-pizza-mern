@@ -1,0 +1,6 @@
+{
+  "port": 5000,
+  "url": "http://localhost:5000",
+  "jwtSecret": "I like drink bacardi",
+  "mongoUri": "mongodb+srv://yaroslav:k5rm8McyWrXgWQe@cluster0.tdym6.mongodb.net/pizza?retryWrites=true&w=majority"
+}

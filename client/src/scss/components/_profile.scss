@@ -1,0 +1,217 @@
+@import '../variables';
+
+.profile{
+  max-width: 900px;
+  margin-right: auto;
+  margin-left: auto;
+
+  h4{
+    font-size: 1.5rem;
+  }
+  &-icon{
+    width: 20px;
+  }
+  &-title{
+    font-size: 1.5rem;
+  }
+  &-field{
+    span{
+      display: block;
+      font-size: 1rem;
+      margin: 0 0 6px;
+    }
+    input{
+      width: 100%;
+      height: 3rem;
+      font-size: 1.5rem;
+      border: 2px solid #eee9e3;
+    }
+
+  }
+  &__form{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+    grid-gap: 1.5rem;
+    align-items: end;
+  }
+}
+
+.profile-nav{
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+
+  &__list{
+    display: flex;
+    border-bottom: 1px solid #eee9e3;
+  }
+  &__item{
+    max-width: 200px;
+    text-align: center;
+    padding: 10px 0;
+    margin-right: 20px;
+    font-size: 1.5rem;
+  }
+  .active{
+    border-bottom: 3px solid #fe5f1e;
+  }
+}
+
+.address{
+  padding: 3rem 0;
+  &__item{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 20px 0;
+    align-items: center;
+
+    .value{
+      font-weight: bold;
+    }
+
+    .button {
+      border-color: darken($color: $gray-line, $amount: 10);
+    }
+
+    svg {
+      transform: rotate(45deg);
+
+      path {
+        fill: darken($color: $gray-line, $amount: 15);
+      }
+    }
+
+    .button {
+      svg {
+        width: 11.5px;
+        height: 11.5px;
+        position: relative;
+      }
+
+      &:hover,
+      &:active {
+        border-color: darken($color: $gray-line, $amount: 80);
+        background-color: darken($color: $gray-line, $amount: 80);
+      }
+    }
+  }
+}
+
+.add-address-block{
+  background: #eee9e3;
+  padding: 10px;
+  &__form{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__field{
+    padding: 5px;
+    input{
+      width: 100%;
+    }
+  }
+  .city{
+    flex: 1 1 30%
+  }
+  .street{
+    flex: 1 1 30%
+  }
+  .number{
+    flex: 0 0 20%
+  }
+  .button{
+    margin-left: 5px;
+  }
+}
+
+.orders-block{
+ .table{
+   &__id, &__reorder {
+     color: #fe5f1e;
+     cursor: pointer;
+   }
+   &__reorder {
+     text-align: right;
+   }
+     &__price, &__date, &__status{
+       text-align: center;
+   }
+ }
+}
+
+.bonuses-block{
+  .bonuses-amount{
+    padding: 10px 0;
+    border-bottom: 1px solid #eee9e3;
+  }
+}
+
+.order-details-block{
+  .order-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 40px 0;
+    border-bottom: 3px solid #eee9e3;
+  }
+
+
+  .row{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 16% 16% 18%;
+    border-bottom: 1px solid #eee9e3;
+    padding: 20px 0;
+
+    .summ{
+      text-align: right;
+      font-weight: bold;
+    }
+
+  }
+  .product-option{
+    height: 0;
+    display: none;
+  }
+  .totals{
+    width: 50%;
+    margin-right: 0;
+    margin-left: auto;
+    padding: 20px 0;
+
+    .row{
+      display: flex;
+      border: none;
+      padding: 10px 0;
+      justify-content: space-between;
+    }
+    .price{
+      text-align: right;
+    }
+    .grand-total{
+      margin-top: 20px;
+      font-size: 32px;
+      font-weight: bold;
+      border-bottom:1px solid #eee9e3;
+    }
+  }
+  .header{
+    border-bottom: 3px solid #eee9e3;
+    color: #76818b;
+  }
+
+}
+
+.title{
+  padding: 20px 0;
+}
+
+@media screen and (max-width: 500px){
+  .profile{
+    &__form{
+      grid-template-columns: minmax(250px, 1fr);
+      grid-gap: 0;
+    }
+  }
+}

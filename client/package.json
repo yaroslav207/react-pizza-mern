@@ -1,0 +1,53 @@
+{
+  "name": "react-pizza",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.20.0",
+    "classnames": "^2.2.6",
+    "materialize-css": "^1.0.0",
+    "node-sass": "^4.14.1",
+    "prop-types": "^15.7.2",
+    "ra-data-simple-rest": "^3.10.4",
+    "react": "^16.13.1",
+    "react-admin": "^3.13.2",
+    "react-content-loader": "^5.1.3",
+    "react-dom": "^16.13.1",
+    "react-materialize": "^3.9.7",
+    "react-redux": "^7.2.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.3",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
+  },
+  "proxy": "http://localhost:5000",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "../../Desktop/react-pizza/node_modules/.bin/react-scripts build",
+    "test": "../../Desktop/react-pizza/node_modules/.bin/react-scripts test",
+    "eject": "../../Desktop/react-pizza/node_modules/.bin/react-scripts eject",
+    "server": "npx json-server --watch public/db.json --port=3001"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "gulp-sass": "^4.1.0"
+  }
+}
