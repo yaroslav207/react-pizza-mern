@@ -37,8 +37,6 @@ router.post(
             const hashedPassword = await bcrypt.hash(password, 12)
             const user = new User({email: login, password: hashedPassword, phone})
 
-            console.log(user)
-
             await user.save();
 
             const token = jwt.sign(
@@ -57,9 +55,8 @@ router.post(
 // /api/auth/login
 router.post(
     '/login',
-    [check('login', 'Введите корректный email').normalizeEmail().isEmail(),
-        check('password', 'Введите пароль').exists()
-    ],
+    [check('username', 'Введите корректный email').normalizeEmail().isEmail(),
+        check('password', 'Введите пароль').exists()],
     async (req, res) => {
         try {
             const errors = validationResult(req);
@@ -70,9 +67,9 @@ router.post(
                 })
             }
 
-            const {login, password} = req.body;
+            const {username, password} = req.body;
 
-            const user = await User.findOne({email: login})
+            const user = await User.findOne({email: username})
 
             if(!user){
                 res.status(400).json({message: 'Пользователь не найден'})
@@ -87,7 +84,7 @@ router.post(
             const token = jwt.sign(
                 {userId: user.id},
                 config.get('jwtSecret'),
-                {expiresIn: '1h'}
+                {expiresIn: '12h'}
                 )
             res.json({token, userId: user.id, isAdmin: user.admin})
 
@@ -102,10 +99,9 @@ router.post(
     auth,
     async (req, res) => {
         try {
-            console.log(req)
-            const {userId} = req.user
+            const {userId} = req.body
             const user = await User.findOne({_id: userId})
-            res.json({user: user})
+            res.json({user: user._id})
         }
         catch (e){
             res.status(500).json({message: 'Что-то пошло не так'})

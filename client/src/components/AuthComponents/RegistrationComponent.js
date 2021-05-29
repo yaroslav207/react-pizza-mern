@@ -20,7 +20,7 @@ function RegistrationComponent({toLogin}) {
     const registerHandler = async () => {
         try {
             const data = await request('/api/auth/register', 'POST', {
-                login: form.login,
+                username: form.login,
                 password: form.password,
                 password2: form.password2,
                 phone: form.phoneNumber

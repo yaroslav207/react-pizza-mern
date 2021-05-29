@@ -21,9 +21,8 @@ function LoginComponent({toRegistration}){
     }
 
     const loginHandler = (loginUser, password) => {
-        request('/api/auth/login', 'POST', {login: loginUser, password: password})
+        request('/api/auth/login', 'POST', {username: loginUser, password: password})
             .then((data) => {
-                console.log(data)
                 localStorage.setItem(storageName, JSON.stringify({userId: data.userId, token: data.token}))
                 dispatch(login({token: data.token, userId: data.userId, isAdmin: data.isAdmin}));
                 history.push('/profile')

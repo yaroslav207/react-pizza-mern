@@ -5,11 +5,13 @@ const schema = new Schema({
     name: {type: String, required: true},
     url: {type: String, required: true},
     types: {type: Array, required: true},
-    sizes: {type: Object, required: true, default: {}},
+    sizes: {type: Array, required: true, default: []},
     category: {type: Types.ObjectId, ref: 'Categories', required: true,},
     rating: {type: Number, default: 0}
 
 })
+
+
 
 // const Pizzas = model('Pizzas', schema)
 // const pizzas = [
@@ -18,7 +20,7 @@ const schema = new Schema({
 //         "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/f035c7f46c0844069722f2bb3ee9f113_584x584.jpeg",
 //         "name": "Пепперони Фреш с перцем",
 //         "types": [0, 1],
-//         "sizes": {"30": 350, "35": 650},
+//         "sizes": [{size: 30, price: 200},{size: 35, price: 400},{size: 40, price: 500}],
 //         "price": 803,
 //         "category": 0,
 //         "rating": 4
@@ -28,7 +30,7 @@ const schema = new Schema({
 //         "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/2ffc31bb-132c-4c99-b894-53f7107a1441.jpg",
 //         "name": "Сырная",
 //         "types": [0],
-//         "sizes": {"26": 250, "30": 350, "35": 650},
+//         "sizes": [{size: 30, price: 200},{size: 35, price: 400},{size: 40, price: 500}],
 //         "price": 245,
 //         "category": 1,
 //         "rating": 6
@@ -38,7 +40,7 @@ const schema = new Schema({
 //         "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/6652fec1-04df-49d8-8744-232f1032c44b.jpg",
 //         "name": "Цыпленок барбекю",
 //         "types": [0],
-//         "sizes": {"26": 350, "30": 450, "35": 850},
+//         "sizes": [{size: 30, price: 200},{size: 35, price: 400},{size: 40, price: 500}],
 //         "price": 295,
 //         "category": 1,
 //         "rating": 4
@@ -48,7 +50,7 @@ const schema = new Schema({
 //         "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/af553bf5-3887-4501-b88e-8f0f55229429.jpg",
 //         "name": "Кисло-сладкий цыпленок",
 //         "types": [1],
-//         "sizes": {"26": 230, "30": 340, "35": 600},
+//         "sizes": [{size: 30, price: 200},{size: 35, price: 400},{size: 40, price: 500}],
 //         "price": 275,
 //         "category": 2,
 //         "rating": 2
@@ -58,7 +60,7 @@ const schema = new Schema({
 //         "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg",
 //         "name": "Чизбургер-пицца",
 //         "types": [0, 1],
-//         "sizes": {"26": 276, "30": 387, "35": 700},
+//         "sizes": [{size: 30, price: 200},{size: 35, price: 400},{size: 40, price: 500}],
 //         "price": 415,
 //         "category": 3,
 //         "rating": 8

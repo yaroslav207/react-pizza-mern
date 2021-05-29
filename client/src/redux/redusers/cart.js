@@ -1,5 +1,5 @@
 const initialState = {
-    items: {},
+    items: [],
     totalPrice: 0,
     totalCount: 0,
     orderConfirmation: false
@@ -11,42 +11,43 @@ const cart = (state = initialState, action) => {
         case 'ADD_PIZZA_CART':
             console.log(action.payload)
 
-            const currentPizzaItems = !state.items[action.payload.id] ? [action.payload]
-                : [...state.items[action.payload.id].items, action.payload];
-
-            const items = {
-                ...state.items,
-                [action.payload.id]: {
-                    items: currentPizzaItems,
-                    totalPriceItems: currentPizzaItems.length * action.payload.price
-                }
-            };
-
-            const allPizzas = [].concat.apply([], Object.values(items).map((obj => obj.items)));
-
+            const items = state.items.find((item) => item.id === action.payload.id)
+                ? (state.items.map(item => {
+                    console.log(item.id === action.payload.id)
+                    return(item.id === action.payload.id)
+                        ? {...item, count: item.count + 1, totalPriceItems: action.payload.price}
+                        : {...item}
+                }))
+                : ([
+                    ...state.items,
+                    {
+                        ...action.payload,
+                        count: 1,
+                        totalPriceItems: action.payload.price
+                    }
+                ])
+            console.log(items)
             return {
                 ...state,
                 items: items,
-                totalCount: allPizzas.length,
-                totalPrice: allPizzas.reduce((sum, obj) => obj.price + sum, 0)
+                totalCount: state.totalCount + 1,
+                totalPrice: state.totalCount + action.payload.price
             };
 
         case 'CLEAR_CART':
             return {
-                items: {},
+                items: [],
                 totalPrice: 0,
                 totalCount: 0,
                 orderConfirmation: false
             };
 
         case 'DELETE_PIZZA':
-            const newItems = {
-                ...state.items
-            };
-            const totalPriceItem = newItems[action.payload].totalPriceItems
-            const totalCountItem = newItems[action.payload].items.length
+            const selectItem = state.items.filter(item => !(item.id === action.payload))
+            const totalPriceItem = selectItem.totalPriceItems
+            const totalCountItem = selectItem.count
 
-            delete newItems[action.payload];
+            const newItems = state.items.filter(item => !(item.id === action.payload))
             return {
                 ...state,
                 items: newItems,
@@ -55,47 +56,41 @@ const cart = (state = initialState, action) => {
             };
 
         case 'MINUS_CART_ITEM': {
-            const oldItems = state.items[action.payload].items
-            console.log(oldItems)
-            if (oldItems.length <= 1){
+            const selectItem = state.items.find(item => {console.log(action.payload); return(item.id === action.payload)})
+            if (selectItem.count <= 1) {
                 return state
             }
 
-            const newItems = oldItems.slice(1)
+            const newItems = state.items.map(item => (item.id === action.payload)
+                ? {...item, count: item.count - 1,}
+                : {...item})
 
             const newState = {
                 ...state,
-                items: {
-                    ...state.items,
-                    [action.payload]: {
-                        items: newItems,
-                        totalPriceItems: newItems.length * newItems[0].price
-                    }
-                },
-                totalPrice: state.totalPrice - newItems[0].price,
+                items: [...newItems],
+                totalPrice: state.totalPrice - selectItem.price,
                 totalCount: state.totalCount - 1
             };
             return newState
         }
 
         case 'PLUS_CART_ITEM': {
-            const newItems = [
-                ...state.items[action.payload].items,
-                state.items[action.payload].items[0]
-            ]
+            const selectItem = state.items.find(item => item.id === action.payload)
+            if (selectItem.items.count <= 1) {
+                return state
+            }
 
-            return {
+            const newItems = state.items.map(item => (item.id === action.payload)
+                ? {...item, count: item.count + 1,}
+                : {...item})
+
+            const newState = {
                 ...state,
-                items: {
-                    ...state.items,
-                    [action.payload]: {
-                        items: newItems,
-                        totalPriceItems: newItems.length * newItems[0].price
-                    }
-                },
-                totalPrice: state.totalPrice + newItems[0].price,
+                items: [...newItems],
+                totalPrice: state.totalPrice + selectItem.price,
                 totalCount: state.totalCount + 1
             };
+            return newState
         }
 
         case 'ORDER_CONFIRMATION': {

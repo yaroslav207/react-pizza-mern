@@ -18,6 +18,7 @@ function App() {
     console.log(adminMode)
     console.log(isAdmin)
 
+
     useEffect(()=>{
         const data = JSON.parse(localStorage.getItem(storageName))
         if (data && data.token) {

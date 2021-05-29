@@ -1,10 +1,26 @@
 const express = require('express')
 const config = require('config');
 const mongoose = require('mongoose')
+const cors = require('cors')
+const fileUpload = require('express-fileupload')
+const path = require('path')
+
+
 
 const app = express();
-
+app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(express.json({ extended: true }))
+app.use(cors());
+app.use(fileUpload({}))
+
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Expose-Headers", "Content-Range");
+    res.header("Content-Range", 0-4/4)
+    next();
+});
 
 const PORT = config.get('port') || 5000
 
@@ -24,7 +40,7 @@ async function start () {
             useCreateIndex: true
         })
     } catch (e){
-        console.log('Server error ',e.mmessage )
+        console.log('Server error ',e.message )
         process.exit(1) //?
     }
 }

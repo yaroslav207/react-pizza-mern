@@ -1,4 +1,4 @@
-const {Schema, model, Types} = require('mongoose');
+const {Schema, model} = require('mongoose');
 
 const schema = new Schema({
     name: {type: String},
@@ -7,7 +7,6 @@ const schema = new Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     admin: {type: Boolean, default: false},
-    orders: {type: Array},
     phone: {type: Number},
     address: {type: Array}
 })

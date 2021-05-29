@@ -7,11 +7,9 @@ function PizzaBlock({_id, url, name, types, sizes, onClickAddPizza, addedCount})
 
 
     const availabelTypes = ['тонкое', 'традиционное'];
-    const availabelSizes = ['26', '30', '35'];
 
-    const sizesItem = Object.keys(sizes);
     const [activeType, setActiveType] = useState(types[0]);
-    const [activeSize, setActiveSize] = useState(sizesItem[0]);
+    const [activeSize, setActiveSize] = useState(0);
 
     const onActiveType = (index) => {
         setActiveType(index)
@@ -25,17 +23,15 @@ function PizzaBlock({_id, url, name, types, sizes, onClickAddPizza, addedCount})
             id: `${_id}/${activeSize}/${activeType}`,
             name,
             url,
-            price: sizes[activeSize],
-            size: activeSize,
-            type: availabelTypes[activeType],
+            price: sizes[activeSize].price,
+            size: sizes[activeSize].size,
+            type: 0,
         }
         return obj;
     }
     const handleOnAddPizza = () => {
         onClickAddPizza(onAddPizza())
     }
-
-
 
     return (
         <div className="pizza-block">
@@ -59,20 +55,19 @@ function PizzaBlock({_id, url, name, types, sizes, onClickAddPizza, addedCount})
                         </li>)}
                 </ul>
                 <ul>
-                    {availabelSizes.map((size) =>
+                    {sizes.map((item, index) =>
                         <li
-                            key={size}
-                            onClick={() => onActiveSize(size)}
+                            key={item.size}
+                            onClick={() => onActiveSize(index)}
                             className={classNames({
-                                'active': activeSize === size,
-                                'disabled': !sizes.hasOwnProperty(size)
+                                'active': activeSize === index
                             })}>
-                            {size} см.
+                            {item.size} см.
                         </li>)}
                 </ul>
             </div>
             <div className="pizza-block__bottom">
-                <div className="pizza-block__price">от {sizes[activeSize]} ₽</div>
+                <div className="pizza-block__price">от {sizes[activeSize].price} ₽</div>
                 <Button
                     onClick={handleOnAddPizza}
                     className='button--add'

@@ -5,7 +5,7 @@ import {useHttp} from "../../hooks/http.hook";
 
 const UserData = () => {
     const {request} = useHttp();
-    const token = useSelector(({auth}) => auth.token);
+    const {token, userId} = useSelector(({auth}) => auth);
     const [form, setForm] = useState({
         name: '',
         phone: '',
@@ -50,7 +50,7 @@ const UserData = () => {
     }
 
     const updateUserData = (data) => {
-        request(`/api/user-data/update`, 'POST', {...data}, {
+        request(`/api/user-data/`, 'PUT', {...data}, {
             Authorization: `Bearer ${token}`
         })
             .then(data => {
@@ -59,14 +59,12 @@ const UserData = () => {
     }
 
     useEffect(() => {
-
-            request(`/api/user-data/`, 'GET', null, {
+            request(`/api/user-data/${userId}`, 'GET', null, {
                 Authorization: `Bearer ${token}`
             })
                 .then(data => {
                     const date = new Date(data.birthDate);
                     const formatedDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2)
-
 
                     setForm({...data, birthDate: formatedDate})
                 })

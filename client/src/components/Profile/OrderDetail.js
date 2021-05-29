@@ -74,7 +74,7 @@ const OrderDetail = () => {
                 .then(data => {
                     const date = new Date(data.date);
                     const formatedDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2)
-                    setOrderDetail({...data, date: formatedDate, keyOrderList: Object.keys(data.orderList)})
+                    setOrderDetail({...data, date: formatedDate})
                 })
         }
         , [orderId])
@@ -82,7 +82,7 @@ const OrderDetail = () => {
         <div className="order-details-block">
             <div className="order-header">
                 <h1 className="account-main-title">
-                    <span className="base" data-ui-id="page-title-wrapper">Заказ {orderId}</span>
+                    <span className="base" data-ui-id="page-title-wrapper">Заказ {orderDetail.orderId}</span>
                 </h1>
                 <span className="order-status">{orderDetail.status?`Выполнено`:`Подготовка`}</span>
 
@@ -110,14 +110,13 @@ const OrderDetail = () => {
                             Итого
                         </div>
                     </div>
-                    {orderDetail.keyOrderList && orderDetail.keyOrderList.map((item) => {
+                    {orderDetail.orderList && orderDetail.orderList.map((item) => {
                         return (
                             <div className="row">
                                 <div className="cell product">
                                     <strong className="product name product-item-name">
-                                        {pizzas.filter((pizza) => {
-                                            console.log(pizza._id === orderDetail.orderList[item].idPizza)
-                                            return(pizza._id === orderDetail.orderList[item].idPizza)})[0].name}</strong>
+                                        {pizzas.find((pizza) => {
+                                            return(pizza._id === item.idPizza)}).name}</strong>
                                     <ul className="product-options">
                                         <li className="product-option">
                                             350 г
@@ -130,17 +129,17 @@ const OrderDetail = () => {
 
                                 </div>
                                 <div className="cell price">
-                                    <span className="price">{orderDetail.orderList[item].price}&nbsp;<span className="currency">грн</span></span>
+                                    <span className="price">{item.price}&nbsp;<span className="currency">грн</span></span>
                                 </div>
                                 <div className="cell count">
                                     <ul className="items-qty">
                                         <li className="item">
-                                            <span className="content">{orderDetail.orderList[item].count}<span> шт</span></span>
+                                            <span className="content">{item.count}<span> шт</span></span>
                                         </li>
                                     </ul>
                                 </div>
                                 <div className="cell summ">
-                                    <span className="price">{orderDetail.orderList[item].totalPrice}&nbsp;<span className="currency">грн</span></span>
+                                    <span className="price">{item.totalPrice}&nbsp;<span className="currency">грн</span></span>
                                 </div>
                             </div>
                         )

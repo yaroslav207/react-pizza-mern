@@ -14,15 +14,10 @@ function Cart() {
     const isAuth = useSelector(({auth}) => auth.isAuth)
 
     const history = useHistory()
-    const addedPizzas = Object.keys(items).map((key) => {
-            return {
-                ...items[key].items[0],
-                totalPriceItems: items[key].totalPriceItems,
-                totalCountItems: items[key].items.length
 
-            }
-        });
+    const addedPizzas = items
 
+    console.log(addedPizzas)
     const onClearCart = () =>{
         if(window.confirm('Вы действиетльно хотите очистить корзину?')){
             dispatch(clearCart())
@@ -94,7 +89,7 @@ function Cart() {
                                     type={item.type}
                                     size={item.size}
                                     price={item.totalPriceItems}
-                                    count={item.totalCountItems}
+                                    count={item.count}
                                     onDeletePizza = {onRemovePizza}
                                     onMinus = {onMinusCartItem}
                                     onPlus = {onPlusCartItem}

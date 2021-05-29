@@ -185,6 +185,10 @@
       border: none;
       padding: 10px 0;
       justify-content: space-between;
+
+      div{
+        flex: 0 0 50%;
+      }
     }
     .price{
       text-align: right;
